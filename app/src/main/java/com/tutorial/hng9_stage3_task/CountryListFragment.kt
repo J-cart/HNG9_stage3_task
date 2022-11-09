@@ -43,9 +43,7 @@ class CountryListFragment : Fragment() {
         }
         setUpCollector()
 
-        binding.errorText.setOnClickListener {
-            findNavController().navigate(R.id.countryInfoFragment)
-        }
+
     }
 
     private fun setUpCollector(){
@@ -54,7 +52,17 @@ class CountryListFragment : Fragment() {
                 when (resource) {
                     is Resource.Successful -> {
                         binding.progressBar.isVisible = false
-                        binding.errorText.text = resource.data?.toString()
+//                        binding.errorText.text = resource.data?.toString()
+
+                        countriesAdapter.submitList(resource.data)
+                        binding.errorText.setOnClickListener {
+                            val route = CountryListFragmentDirections.actionCountryListFragmentToCountryInfoFragment(null)//resource.data?.get(2)
+                            findNavController().navigate(route)
+                        }
+                        countriesAdapter.onAdapterClick {
+                            val route = CountryListFragmentDirections.actionCountryListFragmentToCountryInfoFragment(it)//resource.data?.get(2)
+                            findNavController().navigate(route)
+                        }
                     }
                     is Resource.Failure -> {
                         binding.progressBar.isVisible = false

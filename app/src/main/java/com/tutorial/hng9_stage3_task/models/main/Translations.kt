@@ -4,56 +4,56 @@ package com.tutorial.hng9_stage3_task.models.main
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 import android.os.Parcelable
-import com.tutorial.hng9_stage3_task.models.language.*
+import com.tutorial.hng9_stage3_task.models.languages.*
 
 @Parcelize
 data class Translations(
     @SerializedName("ara")
-    val ara: Ara,
+    val ara: Ara?,
     @SerializedName("bre")
-    val bre: Bre,
+    val bre: Bre?,
     @SerializedName("ces")
-    val ces: Ces,
+    val ces: Ces?,
     @SerializedName("cym")
-    val cym: Cym,
+    val cym: Cym?,
     @SerializedName("deu")
-    val deu: Deu,
+    val deu: Deu?,
     @SerializedName("est")
-    val est: Est,
+    val est: Est?,
     @SerializedName("fin")
-    val fin: Fin,
+    val fin: Fin?,
     @SerializedName("fra")
-    val fra: FraX,
+    val fra: FraX?,
     @SerializedName("hrv")
-    val hrv: Hrv,
+    val hrv: Hrv?,
     @SerializedName("hun")
-    val hun: Hun,
+    val hun: Hun?,
     @SerializedName("ita")
-    val ita: Ita,
+    val ita: Ita?,
     @SerializedName("jpn")
-    val jpn: Jpn,
+    val jpn: Jpn?,
     @SerializedName("kor")
-    val kor: Kor,
+    val kor: Kor?,
     @SerializedName("nld")
-    val nld: Nld,
+    val nld: Nld?,
     @SerializedName("per")
-    val per: Per,
+    val per: Per?,
     @SerializedName("pol")
-    val pol: Pol,
+    val pol: Pol?,
     @SerializedName("por")
-    val por: Por,
+    val por: Por?,
     @SerializedName("rus")
-    val rus: Rus,
+    val rus: Rus?,
     @SerializedName("slk")
-    val slk: Slk,
+    val slk: Slk?,
     @SerializedName("spa")
-    val spa: SpaX,
+    val spa: SpaX?,
     @SerializedName("swe")
-    val swe: Swe,
+    val swe: Swe?,
     @SerializedName("tur")
-    val tur: Tur,
+    val tur: Tur?,
     @SerializedName("urd")
-    val urd: Urd,
+    val urd: Urd?,
     @SerializedName("zho")
-    val zho: Zho
+    val zho: Zho?
 ) : Parcelable

@@ -9,12 +9,19 @@
         android:id="@+id/countryInfoFragment"
         android:name="com.tutorial.hng9_stage3_task.CountryInfoFragment"
         android:label="fragment_country_info"
-        tools:layout="@layout/fragment_country_info" />
+        tools:layout="@layout/fragment_country_info" >
+        <argument
+            android:name="countryItem"
+            app:argType="com.tutorial.hng9_stage3_task.models.main.CountriesItem"
+            app:nullable="true"
+            />
+    </fragment>
     <fragment
         android:id="@+id/countryListFragment"
         android:name="com.tutorial.hng9_stage3_task.CountryListFragment"
         android:label="fragment_country_list"
         tools:layout="@layout/fragment_country_list" >
+
         <action
             android:id="@+id/action_countryListFragment_to_countryInfoFragment"
             app:destination="@id/countryInfoFragment" />

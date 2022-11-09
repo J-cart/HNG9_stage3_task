@@ -4,80 +4,80 @@ package com.tutorial.hng9_stage3_task.models.main
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 import android.os.Parcelable
-import com.tutorial.hng9_stage3_task.models.language.Car
-import com.tutorial.hng9_stage3_task.models.language.Gini
-import com.tutorial.hng9_stage3_task.models.language.Idd
+import com.tutorial.hng9_stage3_task.models.languages.Car
+import com.tutorial.hng9_stage3_task.models.languages.Gini
+import com.tutorial.hng9_stage3_task.models.languages.Idd
 
 @Parcelize
 data class CountriesItem(
     @SerializedName("altSpellings")
-    val altSpellings: List<String>,
+    val altSpellings: List<String>?,
     @SerializedName("area")
-    val area: Double,
+    val area: Double?,
     @SerializedName("borders")
-    val borders: List<String>,
+    val borders: List<String>?,
     @SerializedName("capital")
-    val capital: List<String>,
+    val capital: List<String>?,
     @SerializedName("capitalInfo")
-    val capitalInfo: CapitalInfo,
+    val capitalInfo: CapitalInfo?,
     @SerializedName("car")
-    val car: Car,
+    val car: Car?,
     @SerializedName("cca2")
-    val cca2: String,
+    val cca2: String?,
     @SerializedName("cca3")
-    val cca3: String,
+    val cca3: String?,
     @SerializedName("ccn3")
-    val ccn3: String,
+    val ccn3: String?,
     @SerializedName("cioc")
-    val cioc: String,
+    val cioc: String?,
     @SerializedName("coatOfArms")
-    val coatOfArms: CoatOfArms,
+    val coatOfArms: CoatOfArms?,
     @SerializedName("continents")
-    val continents: List<String>,
+    val continents: List<String>?,
     @SerializedName("currencies")
-    val currencies: Currencies,
+    val currencies: Currencies?,
     @SerializedName("demonyms")
-    val demonyms: Demonyms,
+    val demonyms: Demonyms?,
     @SerializedName("fifa")
-    val fifa: String,
+    val fifa: String?,
     @SerializedName("flag")
-    val flag: String,
+    val flag: String?,
     @SerializedName("flags")
-    val flags: Flags,
+    val flags: Flags?,
     @SerializedName("gini")
-    val gini: Gini,
+    val gini: Gini?,
     @SerializedName("idd")
-    val idd: Idd,
+    val idd: Idd?,
     @SerializedName("independent")
-    val independent: Boolean,
+    val independent: Boolean?,
     @SerializedName("landlocked")
-    val landlocked: Boolean,
+    val landlocked: Boolean?,
     @SerializedName("languages")
-    val languages: Languages,
+    val languages: Languages?,
     @SerializedName("latlng")
-    val latlng: List<Double>,
+    val latlng: List<Double>?,
     @SerializedName("maps")
-    val maps: Maps,
+    val maps: Maps?,
     @SerializedName("name")
-    val name: Name,
+    val name: Name?,
     @SerializedName("population")
-    val population: Int,
+    val population: Int?,
     @SerializedName("postalCode")
-    val postalCode: PostalCode,
+    val postalCode: PostalCode?,
     @SerializedName("region")
-    val region: String,
+    val region: String?,
     @SerializedName("startOfWeek")
-    val startOfWeek: String,
+    val startOfWeek: String?,
     @SerializedName("status")
-    val status: String,
+    val status: String?,
     @SerializedName("subregion")
-    val subregion: String,
+    val subregion: String?,
     @SerializedName("timezones")
-    val timezones: List<String>,
+    val timezones: List<String>?,
     @SerializedName("tld")
-    val tld: List<String>,
+    val tld: List<String>?,
     @SerializedName("translations")
-    val translations: Translations,
+    val translations: Translations?,
     @SerializedName("unMember")
-    val unMember: Boolean
+    val unMember: Boolean?
 ) : Parcelable

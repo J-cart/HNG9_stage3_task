@@ -15,6 +15,10 @@ class CountriesAdapter : ListAdapter<CountriesItem, CountriesAdapter.ViewHolder>
         private val binding = CustomViewholderBinding.bind(view)
         fun bind(data: CountriesItem) {
             binding.msg.text = data.toString()
+            binding.root.setOnClickListener {
+                listener?.invoke(data)
+            }
+
         }
     }
 
@@ -39,6 +43,12 @@ class CountriesAdapter : ListAdapter<CountriesItem, CountriesAdapter.ViewHolder>
         if (pos != null) {
             holder.bind(pos)
         }
+    }
+
+    private var listener:((CountriesItem)->Unit)? = null
+
+    fun onAdapterClick(onclick:(CountriesItem)->Unit){
+        listener = onclick
     }
 
 }

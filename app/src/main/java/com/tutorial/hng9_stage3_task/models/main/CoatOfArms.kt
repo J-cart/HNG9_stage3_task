@@ -8,7 +8,7 @@ import android.os.Parcelable
 @Parcelize
 data class CoatOfArms(
     @SerializedName("png")
-    val png: String,
+    val png: String?,
     @SerializedName("svg")
-    val svg: String
+    val svg: String?
 ) : Parcelable

@@ -8,5 +8,5 @@ import android.os.Parcelable
 @Parcelize
 data class CapitalInfo(
     @SerializedName("latlng")
-    val latlng: List<Double>
+    val latlng: List<Double>?
 ) : Parcelable

@@ -8,7 +8,7 @@ import android.os.Parcelable
 @Parcelize
 data class PostalCode(
     @SerializedName("format")
-    val format: String,
+    val format: String?,
     @SerializedName("regex")
-    val regex: String
+    val regex: String?
 ) : Parcelable

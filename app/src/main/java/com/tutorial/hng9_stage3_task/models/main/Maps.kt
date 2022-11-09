@@ -8,7 +8,7 @@ import android.os.Parcelable
 @Parcelize
 data class Maps(
     @SerializedName("googleMaps")
-    val googleMaps: String,
+    val googleMaps: String?,
     @SerializedName("openStreetMaps")
-    val openStreetMaps: String
+    val openStreetMaps: String?
 ) : Parcelable

@@ -1,4 +1,4 @@
-package com.tutorial.hng9_stage3_task.models.main
+package com.tutorial.hng9_stage3_task.models.languages
 
 
 import com.google.gson.annotations.SerializedName
@@ -6,11 +6,9 @@ import kotlinx.parcelize.Parcelize
 import android.os.Parcelable
 
 @Parcelize
-data class Name(
+data class Urd(
     @SerializedName("common")
     val common: String?,
-    @SerializedName("nativeName")
-    val nativeName: NativeName?,
     @SerializedName("official")
     val official: String?
 ) : Parcelable
