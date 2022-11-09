@@ -16,7 +16,7 @@ import retrofit2.http.POST
 
 interface CountriesApi{
     @GET("all")
-    suspend fun getAllCountries(): Response<Resource<Countries>>
+    suspend fun getAllCountries(): Response<Countries>
 }
 
 

@@ -20,8 +20,8 @@ class CountriesViewModel : ViewModel() {
             val result = ApiService.retrofitApiService.getAllCountries()
             when {
                 result.isSuccessful -> {
-                    result.body()?.data?.let { countries->
-                        if (!countries.isEmpty()){
+                    result.body()?.let { countries->
+                        if (countries.isNotEmpty()){
                             _allCountriesFlow.value = Resource.Successful(countries)
                         }else{
                             _allCountriesFlow.value = Resource.Empty()
