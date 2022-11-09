@@ -1,10 +1,13 @@
 package com.tutorial.hng9_stage3_task.arch
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tutorial.hng9_stage3_task.ApiService
 import com.tutorial.hng9_stage3_task.models.Resource
 import com.tutorial.hng9_stage3_task.models.main.Countries
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -17,21 +20,28 @@ class CountriesViewModel : ViewModel() {
 
     suspend fun getAllCountries() {
         viewModelScope.launch {
-            val result = ApiService.retrofitApiService.getAllCountries()
-            when {
-                result.isSuccessful -> {
-                    result.body()?.let { countries->
-                        if (countries.isNotEmpty()){
-                            _allCountriesFlow.value = Resource.Successful(countries)
-                        }else{
-                            _allCountriesFlow.value = Resource.Empty()
+            try {
+                val result = ApiService.retrofitApiService.getAllCountries()
+                when {
+                    result.isSuccessful -> {
+                        result.body()?.let { countries ->
+                            if (countries.isNotEmpty()) {
+                                _allCountriesFlow.value = Resource.Successful(countries)
+                            } else {
+                                _allCountriesFlow.value = Resource.Empty()
+                            }
                         }
                     }
+                    else -> {
+                        _allCountriesFlow.value = Resource.Failure(result.errorBody().toString())
+                    }
                 }
-                else -> {
-                    _allCountriesFlow.value = Resource.Failure(result.errorBody().toString())
-                }
+            }catch (e: Exception) {
+                _allCountriesFlow.value = Resource.Failure(e.toString())
+                Log.d("Inside try catch 2", "$e")
             }
+
+
         }
     }
 }

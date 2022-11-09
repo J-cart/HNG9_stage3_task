@@ -14,14 +14,14 @@ import androidx.navigation.fragment.findNavController
 import com.tutorial.hng9_stage3_task.arch.CountriesViewModel
 import com.tutorial.hng9_stage3_task.databinding.FragmentCountryListBinding
 import com.tutorial.hng9_stage3_task.models.Resource
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 class CountryListFragment : Fragment() {
     private var _binding: FragmentCountryListBinding? = null
     private val binding get() = _binding!!
     private val viewModel: CountriesViewModel by viewModels()
     private val countriesAdapter by lazy { CountriesAdapter() }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,16 +31,25 @@ class CountryListFragment : Fragment() {
         return binding.root
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.countriesRv.adapter = countriesAdapter
-        lifecycleScope.launch(Dispatchers.IO) {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.CREATED) {
+
+        lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.CREATED){
                 viewModel.getAllCountries()
             }
         }
+        setUpCollector()
 
-        lifecycleScope.launch(Dispatchers.Main) {
+        binding.errorText.setOnClickListener {
+            findNavController().navigate(R.id.countryInfoFragment)
+        }
+    }
+
+    private fun setUpCollector(){
+        lifecycleScope.launch {
             viewModel.allCountriesFlow.collect { resource ->
                 when (resource) {
                     is Resource.Successful -> {
@@ -60,11 +69,6 @@ class CountryListFragment : Fragment() {
                 }
 
             }
-
-
-        }
-        binding.errorText.setOnClickListener {
-            findNavController().navigate(R.id.countryInfoFragment)
         }
     }
 }
