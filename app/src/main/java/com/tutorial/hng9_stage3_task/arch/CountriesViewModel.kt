@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.tutorial.hng9_stage3_task.ApiService
 import com.tutorial.hng9_stage3_task.models.Resource
 import com.tutorial.hng9_stage3_task.models.main.Countries
+import com.tutorial.hng9_stage3_task.models.main.CountriesItem
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -28,6 +29,7 @@ class CountriesViewModel : ViewModel() {
                             if (countries.isNotEmpty()) {
                                 _allCountriesFlow.value =
                                     Resource.Successful(countries)
+                                dataMapper(countries)
                             } else {
                                 _allCountriesFlow.value = Resource.Empty()
                             }
@@ -45,6 +47,27 @@ class CountriesViewModel : ViewModel() {
 
         }
     }
+
+    private fun dataMapper(data:Countries){
+
+        val list = CharRange('A','Z').toMutableList()
+        val mainList = mutableListOf<MapperNew>()
+        list.forEach { char->
+            val newList = mutableListOf<CountriesItem>()
+            data.forEach { countriesItem ->
+                val case = countriesItem.name?.common?.startsWith(prefix = char.toString(),ignoreCase = true)
+                if (case == true){
+                    newList.add(countriesItem)
+                }
+            }
+            mainList.add(MapperNew(char.toString(),newList))
+        }
+        mainList.forEach {
+            Log.d("MappingItems","$it")
+        }
+    }
+
+    data class MapperNew(val char:String, val items:List<CountriesItem>)
 
 }
 
