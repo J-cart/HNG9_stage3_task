@@ -1,13 +1,13 @@
 package com.tutorial.hng9_stage3_task.arch
 
-import com.tutorial.hng9_stage3_task.models.MapperNew
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tutorial.hng9_stage3_task.utils.ApiService
+import com.tutorial.hng9_stage3_task.models.MapperNew
 import com.tutorial.hng9_stage3_task.models.Resource
 import com.tutorial.hng9_stage3_task.models.main.Countries
 import com.tutorial.hng9_stage3_task.models.main.CountriesItem
+import com.tutorial.hng9_stage3_task.utils.ApiService
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -52,26 +52,28 @@ class CountriesViewModel : ViewModel() {
         }
     }
 
-    private fun dataMapper(data:Countries):List<MapperNew>{
+    private fun dataMapper(data: Countries): List<MapperNew> {
 
-        val list = CharRange('A','Z').toMutableList()
+        val list = CharRange('A', 'Z').toMutableList()
         val mainList = mutableListOf<MapperNew>()
-        list.forEach { char->
+        list.forEach { char ->
             val newList = mutableListOf<CountriesItem>()
             data.forEach { countriesItem ->
-                val case = countriesItem.name?.common?.startsWith(prefix = char.toString(),ignoreCase = true)
-                if (case == true){
+                val case = countriesItem.name?.common?.startsWith(
+                    prefix = char.toString(),
+                    ignoreCase = true
+                )
+                if (case == true) {
                     newList.add(countriesItem)
                 }
             }
-            mainList.add(MapperNew(char.toString(),newList))
+            mainList.add(MapperNew(char.toString(), newList))
         }
-        mainList.forEach {
-            Log.d("MappingItems","$it")
-        }
+
+        Log.d("MappingItems", "$mainList")
+
         return mainList
     }
-
 
 
 }

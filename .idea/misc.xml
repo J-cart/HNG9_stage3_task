@@ -3,13 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/HNG9_stage3_task/app/src/main/res/drawable/background_shape.xml" value="0.261" />
         <entry key="..\:/Users/DELL/AndroidStudioProjects/HNG9_stage3_task/app/src/main/res/drawable/bg_white_background.xml" value="0.2225" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/HNG9_stage3_task/app/src/main/res/drawable/ic_baseline_arrow_back_ios_24.xml" value="0.261" />
         <entry key="..\:/Users/DELL/AndroidStudioProjects/HNG9_stage3_task/app/src/main/res/drawable/loading_anim.xml" value="0.2225" />
         <entry key="..\:/Users/DELL/AndroidStudioProjects/HNG9_stage3_task/app/src/main/res/drawable/loading_img.xml" value="0.2225" />
         <entry key="..\:/Users/DELL/AndroidStudioProjects/HNG9_stage3_task/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/DELL/AndroidStudioProjects/HNG9_stage3_task/app/src/main/res/layout/custom_parent_viewholder.xml" value="0.264" />
-        <entry key="..\:/Users/DELL/AndroidStudioProjects/HNG9_stage3_task/app/src/main/res/layout/custom_viewholder.xml" value="0.13019250253292808" />
-        <entry key="..\:/Users/DELL/AndroidStudioProjects/HNG9_stage3_task/app/src/main/res/layout/fragment_country_info.xml" value="0.1503623188405797" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/HNG9_stage3_task/app/src/main/res/layout/custom_viewholder.xml" value="0.4" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/HNG9_stage3_task/app/src/main/res/layout/fragment_country_info.xml" value="0.264" />
         <entry key="..\:/Users/DELL/AndroidStudioProjects/HNG9_stage3_task/app/src/main/res/layout/fragment_country_list.xml" value="0.176" />
       </map>
     </option>

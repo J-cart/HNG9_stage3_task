@@ -1,24 +1,520 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CountryInfoFragment">
 
-    <ru.tinkoff.scrollingpagerindicator.ScrollingPagerIndicator
-        android:id="@+id/indicator"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/receiverText"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="match_parent">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="32dp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/imageAssets"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MaterialComponents.MaterialCalendar.Day"
+                    android:src="@drawable/ic_launcher_foreground"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/prevBtn"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="43dp"
+                    android:src="@drawable/ic_baseline_arrow_back_ios_24"
+                    android:background="@drawable/background_shape"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    tools:layout_editor_absoluteY="74dp" />
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/nextBtn"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="43dp"
+                    android:src="@drawable/ic_baseline_arrow_back_ios_24"
+                    android:background="@drawable/background_shape"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <ru.tinkoff.scrollingpagerindicator.ScrollingPagerIndicator
+                    android:id="@+id/indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/popHolder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:padding="3dp"
+            android:text="Population:"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline2" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/regHolder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:padding="3dp"
+            android:text="Region:"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/popHolder" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/capHolder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:padding="3dp"
+            android:text="Capital:"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/regHolder" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/subRegHolder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:padding="3dp"
+            android:text="Sub Region:"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/capHolder" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/continentHolder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:padding="3dp"
+            android:text="Continent:"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline5" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/offNameHolder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:padding="3dp"
+            android:text="Official Name:"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/continentHolder" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/denonymHolder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:padding="3dp"
+            android:text="Denonym:"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/offNameHolder" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/startOfWkHolder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:padding="3dp"
+            android:text="Start Of Week:"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/denonymHolder" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/bordersHolder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:padding="3dp"
+            android:text="Borders:"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline7" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/areaHolder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:padding="3dp"
+            android:text="Area:"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bordersHolder" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/coordinatesHolder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:padding="3dp"
+            android:text="Coordinates:"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/areaHolder" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/capCoordHolder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:padding="3dp"
+            android:text="Capital Coordinates:"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/coordinatesHolder" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/timeZoneHolder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:padding="3dp"
+            android:text="Time Zone:"
+            android:textAlignment="textStart"
+
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline8" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/nccHolder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:padding="3dp"
+            android:text="Numeric Country Code(ISO 3166):"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/timeZoneHolder" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/dialingCodeHolder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:padding="3dp"
+            android:text="Dialing Code:"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nccHolder" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/drivingSideHolder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:padding="3dp"
+            android:text="Driving Side:"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dialingCodeHolder" />
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/popText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textAlignment="textStart"
+            app:layout_constraintBottom_toBottomOf="@id/popHolder"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/popHolder"
+            app:layout_constraintTop_toTopOf="@id/popHolder"
+            tools:text="Population:" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/regText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textAlignment="textStart"
+            app:layout_constraintBottom_toBottomOf="@id/regHolder"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/regHolder"
+            app:layout_constraintTop_toTopOf="@id/regHolder"
+            tools:text="Region:" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/capText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textAlignment="textStart"
+            app:layout_constraintBottom_toBottomOf="@id/capHolder"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/capHolder"
+            app:layout_constraintTop_toTopOf="@id/capHolder"
+            tools:text="Capital:" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/subRegText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textAlignment="textStart"
+            app:layout_constraintBottom_toBottomOf="@id/subRegHolder"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/subRegHolder"
+            app:layout_constraintTop_toTopOf="@id/subRegHolder"
+            tools:text="Sub region:" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/continentText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+
+            android:textAlignment="textStart"
+            app:layout_constraintBottom_toBottomOf="@id/continentHolder"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/continentHolder"
+            app:layout_constraintTop_toTopOf="@id/continentHolder"
+            tools:text="continent" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/offNameText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:textAlignment="textStart"
+            app:layout_constraintBottom_toBottomOf="@id/offNameHolder"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/offNameHolder"
+            app:layout_constraintTop_toTopOf="@id/offNameHolder"
+            tools:text="Ethnic Group:" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/denonymText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:textAlignment="textStart"
+            app:layout_constraintBottom_toBottomOf="@id/denonymHolder"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/denonymHolder"
+            app:layout_constraintTop_toTopOf="@id/denonymHolder"
+            tools:text="denonym:" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/startOfWkText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:textAlignment="textStart"
+            app:layout_constraintBottom_toBottomOf="@id/startOfWkHolder"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/startOfWkHolder"
+            app:layout_constraintTop_toTopOf="@id/startOfWkHolder"
+            tools:text="Government:" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/bordersText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:textAlignment="textStart"
+            app:layout_constraintBottom_toBottomOf="@id/bordersHolder"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/bordersHolder"
+            app:layout_constraintTop_toTopOf="@id/bordersHolder"
+            tools:text="Borders:" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/areaText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:textAlignment="textStart"
+            app:layout_constraintBottom_toBottomOf="@id/areaHolder"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/areaHolder"
+            app:layout_constraintTop_toTopOf="@id/areaHolder"
+            tools:text="Area:" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/coordinatesText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:textAlignment="textStart"
+            app:layout_constraintBottom_toBottomOf="@id/coordinatesHolder"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/coordinatesHolder"
+            app:layout_constraintTop_toTopOf="@id/coordinatesHolder"
+            tools:text="latlng something:" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/capCoordText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:textAlignment="textStart"
+            app:layout_constraintBottom_toBottomOf="@id/capCoordHolder"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/capCoordHolder"
+            app:layout_constraintTop_toTopOf="@id/capCoordHolder"
+            tools:text="latlng Something:" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/timeZoneText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textAlignment="textStart"
+            app:layout_constraintBottom_toBottomOf="@id/timeZoneHolder"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/timeZoneHolder"
+            app:layout_constraintTop_toTopOf="@id/timeZoneHolder"
+            tools:text="Time Zone:" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/nccText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textAlignment="textStart"
+            app:layout_constraintBottom_toBottomOf="@id/nccHolder"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/nccHolder"
+            app:layout_constraintTop_toTopOf="@id/nccHolder"
+            tools:text="574:" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/dialingCodeText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textAlignment="textStart"
+            app:layout_constraintBottom_toBottomOf="@id/dialingCodeHolder"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/dialingCodeHolder"
+            app:layout_constraintTop_toTopOf="@id/dialingCodeHolder"
+            tools:text="Dialing Code:" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/drivingSideText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textAlignment="textStart"
+            app:layout_constraintBottom_toBottomOf="@id/drivingSideHolder"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/drivingSideHolder"
+            app:layout_constraintTop_toTopOf="@id/drivingSideHolder"
+            tools:text="Driving Side:" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="230dp" />
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="340dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="450dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="560dp" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
+
