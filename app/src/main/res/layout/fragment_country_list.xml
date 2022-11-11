@@ -52,6 +52,7 @@
         android:clipToPadding="false"
         android:fadeScrollbars="true"
         android:orientation="vertical"
+        tools:listitem="@layout/custom_parent_viewholder"
         android:overScrollMode="ifContentScrolls"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -1,9 +1,10 @@
 package com.tutorial.hng9_stage3_task.arch
 
+import com.tutorial.hng9_stage3_task.models.MapperNew
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tutorial.hng9_stage3_task.ApiService
+import com.tutorial.hng9_stage3_task.utils.ApiService
 import com.tutorial.hng9_stage3_task.models.Resource
 import com.tutorial.hng9_stage3_task.models.main.Countries
 import com.tutorial.hng9_stage3_task.models.main.CountriesItem
@@ -14,8 +15,10 @@ import kotlinx.coroutines.launch
 class CountriesViewModel : ViewModel() {
 
 
-    private var _allCountriesFlow = MutableStateFlow<Resource<Countries>>(Resource.Loading())
+    private var _allCountriesFlow = MutableStateFlow<Resource<List<MapperNew>>>(Resource.Loading())
     val allCountriesFlow get() = _allCountriesFlow.asStateFlow()
+//private var _allCountriesFlow = MutableStateFlow<Resource<Countries>>(Resource.Loading())
+//    val allCountriesFlow get() = _allCountriesFlow.asStateFlow()
 
 
     suspend fun getAllCountries() {
@@ -27,9 +30,10 @@ class CountriesViewModel : ViewModel() {
                     result.isSuccessful -> {
                         result.body()?.let { countries ->
                             if (countries.isNotEmpty()) {
-                                _allCountriesFlow.value =
-                                    Resource.Successful(countries)
-                                dataMapper(countries)
+
+                                _allCountriesFlow.value = Resource.Successful(dataMapper(countries))
+//                                    Resource.Successful(countries)
+
                             } else {
                                 _allCountriesFlow.value = Resource.Empty()
                             }
@@ -48,7 +52,7 @@ class CountriesViewModel : ViewModel() {
         }
     }
 
-    private fun dataMapper(data:Countries){
+    private fun dataMapper(data:Countries):List<MapperNew>{
 
         val list = CharRange('A','Z').toMutableList()
         val mainList = mutableListOf<MapperNew>()
@@ -65,9 +69,10 @@ class CountriesViewModel : ViewModel() {
         mainList.forEach {
             Log.d("MappingItems","$it")
         }
+        return mainList
     }
 
-    data class MapperNew(val char:String, val items:List<CountriesItem>)
+
 
 }
 

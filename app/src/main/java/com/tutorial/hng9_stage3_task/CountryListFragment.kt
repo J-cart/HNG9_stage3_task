@@ -14,13 +14,18 @@ import androidx.navigation.fragment.findNavController
 import com.tutorial.hng9_stage3_task.arch.CountriesViewModel
 import com.tutorial.hng9_stage3_task.databinding.FragmentCountryListBinding
 import com.tutorial.hng9_stage3_task.models.Resource
+import com.tutorial.hng9_stage3_task.models.main.CountriesItem
+import com.tutorial.hng9_stage3_task.utils.ParentAdapter
+import com.tutorial.hng9_stage3_task.utils.RegisterClicks
 import kotlinx.coroutines.*
 
-class CountryListFragment : Fragment() {
+class CountryListFragment : Fragment(), RegisterClicks {
     private var _binding: FragmentCountryListBinding? = null
     private val binding get() = _binding!!
     private val viewModel: CountriesViewModel by viewModels()
-    private val countriesAdapter by lazy { CountriesAdapter() }
+//    private val countriesAdapter by lazy { CountriesAdapter() }
+    private val countriesAdapter by lazy { ParentAdapter(this) }
+//    private val childAdapter by lazy { ChildAdapter() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,15 +59,19 @@ class CountryListFragment : Fragment() {
                         binding.progressBar.isVisible = false
 //                        binding.errorText.text = resource.data?.toString()
 
-                        countriesAdapter.submitList(resource.data)
+                        resource.data?.let { countriesAdapter.submitList(it) }
                         binding.errorText.setOnClickListener {
                             val route = CountryListFragmentDirections.actionCountryListFragmentToCountryInfoFragment(null)//resource.data?.get(2)
                             findNavController().navigate(route)
                         }
-                        countriesAdapter.onAdapterClick {
-                            val route = CountryListFragmentDirections.actionCountryListFragmentToCountryInfoFragment(it)//resource.data?.get(2)
-                            findNavController().navigate(route)
-                        }
+//                        countriesAdapter.onAdapterClick {
+//                            val route = CountryListFragmentDirections.actionCountryListFragmentToCountryInfoFragment(it)//resource.data?.get(2)
+//                            findNavController().navigate(route)
+//                        }
+//                        childAdapter.onAdapterClick {
+//                            val route = CountryListFragmentDirections.actionCountryListFragmentToCountryInfoFragment(it)//resource.data?.get(2)
+//                            findNavController().navigate(route)
+//                        }
                     }
                     is Resource.Failure -> {
                         binding.progressBar.isVisible = false
@@ -79,4 +88,8 @@ class CountryListFragment : Fragment() {
             }
         }
     }
+
+    override fun onChildClicked(data: CountriesItem) {
+        val route = CountryListFragmentDirections.actionCountryListFragmentToCountryInfoFragment(data)//resource.data?.get(2)
+        findNavController().navigate(route)    }
 }

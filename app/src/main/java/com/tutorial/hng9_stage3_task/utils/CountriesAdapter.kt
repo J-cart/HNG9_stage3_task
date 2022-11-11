@@ -1,4 +1,4 @@
-package com.tutorial.hng9_stage3_task
+package com.tutorial.hng9_stage3_task.utils
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.tutorial.hng9_stage3_task.R
 import com.tutorial.hng9_stage3_task.databinding.CustomViewholderBinding
 import com.tutorial.hng9_stage3_task.models.main.CountriesItem
 
@@ -14,7 +15,7 @@ class CountriesAdapter : ListAdapter<CountriesItem, CountriesAdapter.ViewHolder>
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = CustomViewholderBinding.bind(view)
         fun bind(data: CountriesItem) {
-            binding.msg.text = data.toString()
+            binding.countryText.text = data.toString()
             binding.root.setOnClickListener {
                 listener?.invoke(data)
             }
@@ -30,7 +31,7 @@ class CountriesAdapter : ListAdapter<CountriesItem, CountriesAdapter.ViewHolder>
             oldItem.capital == newItem.capital
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CountriesAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.custom_viewholder, parent, false)
         return ViewHolder(view)
@@ -38,7 +39,7 @@ class CountriesAdapter : ListAdapter<CountriesItem, CountriesAdapter.ViewHolder>
     }
 
 
-    override fun onBindViewHolder(holder: CountriesAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val pos = getItem(position)
         if (pos != null) {
             holder.bind(pos)
