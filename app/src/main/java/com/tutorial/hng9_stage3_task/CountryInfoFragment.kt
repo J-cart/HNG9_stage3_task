@@ -73,17 +73,6 @@ class CountryInfoFragment : Fragment() {
                 drivingSideText.text = countriesItem.car?.side
 
 
-//                countriesItem.coatOfArms?.png?.let { imageAssets.load(it) }
-                prevBtn.setOnClickListener {
-                    if (index >= 0) {
-                        index = (index - 1) % imageList.size
-                        imageAssets.load(imageList[index])
-                        Log.d("imageList", index.toString())
-                    }else{
-                        index = 0
-                    }
-
-                }
                 nextBtn.setOnClickListener {
                     index = (index + 1) % imageList.size
                     imageAssets.load(imageList[index])
