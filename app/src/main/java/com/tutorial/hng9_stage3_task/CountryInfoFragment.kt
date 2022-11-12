@@ -79,6 +79,8 @@ class CountryInfoFragment : Fragment() {
                         index = (index - 1) % imageList.size
                         imageAssets.load(imageList[index])
                         Log.d("imageList", index.toString())
+                    }else{
+                        index = 0
                     }
 
                 }
