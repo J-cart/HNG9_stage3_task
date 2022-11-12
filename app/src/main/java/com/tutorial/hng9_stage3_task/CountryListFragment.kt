@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.children
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -11,6 +12,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.tutorial.hng9_stage3_task.arch.CountriesViewModel
 import com.tutorial.hng9_stage3_task.databinding.FragmentCountryListBinding
 import com.tutorial.hng9_stage3_task.models.Resource
@@ -67,8 +69,11 @@ class CountryListFragment : Fragment(), RegisterClicks {
                         }
                     }
                     is Resource.Failure -> {
-                        binding.progressBar.isVisible = false
+                        binding.progressBar.isVisible = binding.countriesRv.layoutManager?.itemCount!! <= 0
+
                         binding.errorText.text = resource.msg
+                        Snackbar.make(requireView(), "ERROR! Try refreshing news", Snackbar.LENGTH_LONG)
+                            .setAction("Refresh") { lifecycleScope.launch { viewModel.getAllCountries() } }.show()
                     }
                     is Resource.Loading -> {
                         binding.progressBar.isVisible = true
