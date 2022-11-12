@@ -21,7 +21,7 @@ class CountriesViewModel : ViewModel() {
     private var _filteredList = MutableStateFlow<Resource<List<MapperNew>>>(Resource.Loading())
     val filteredList get() = _filteredList.asStateFlow()
 
-    private var rawList = MutableStateFlow<Resource<Countries>>(Resource.Empty())
+     var rawList = MutableStateFlow<Resource<List<CountriesItem>>>(Resource.Empty())
 
 //private var _allCountriesFlow = MutableStateFlow<Resource<Countries>>(Resource.Loading())
 //    val allCountriesFlow get() = _allCountriesFlow.asStateFlow()
@@ -66,15 +66,15 @@ class CountriesViewModel : ViewModel() {
         Log.d("filter Result", "inside filters method")
         viewModelScope.launch {
             rawList.collect { resource ->
-                Log.d("filter Result", "${rawList.value}")
+                Log.d("filter Result", "raw List${rawList.value}")
                 when (resource) {
                     is Resource.Successful -> {
                         resource.data?.let {
                             val filter = filteredResult(continents, timeZones, it)
-                            Log.d("filter Result", "$filter")
+                            Log.d("filter Result", "filtered item $filter")
                             if (filter.isNotEmpty()) {
                                 _filteredList.value =
-                                    Resource.Successful(dataMapper(filter as Countries))
+                                    Resource.Successful(dataMapper(filter))
                             } else {
                                 _filteredList.value = Resource.Empty()
                             }
@@ -91,7 +91,7 @@ class CountriesViewModel : ViewModel() {
         }
     }
 
-    private fun dataMapper(data: Countries): List<MapperNew> {
+    private fun dataMapper(data: List<CountriesItem>): List<MapperNew> {
 
         val list = CharRange('A', 'Z').toMutableList()
         val mainList = mutableListOf<MapperNew>()
@@ -117,7 +117,7 @@ class CountriesViewModel : ViewModel() {
     private fun filteredResult(
         continents: List<String>,
         timeZone: List<String>,
-        data: Countries
+        data: List<CountriesItem>
     ): List<CountriesItem> {
         val list = mutableListOf<CountriesItem>()
         val continent = data.filter { items ->
@@ -133,6 +133,7 @@ class CountriesViewModel : ViewModel() {
         }
         list.addAll(continent)
         list.addAll(time)
+        Log.d("filter viewModel","$list")
         return list
     }
 

@@ -33,9 +33,9 @@ class CountryInfoFragment : Fragment() {
         args.countryItem?.let { countriesItem ->
             val imageList = mutableListOf<String>()
             countriesItem.flags?.png?.let { imageList.add(it) }
-            countriesItem.flags?.svg?.let { imageList.add(it) }
+//            countriesItem.flags?.svg?.let { imageList.add(it) }
             countriesItem.coatOfArms?.png?.let { imageList.add(it) }
-            countriesItem.coatOfArms?.svg?.let { imageList.add(it) }
+//            countriesItem.coatOfArms?.svg?.let { imageList.add(it) }
 
 
             Log.d("Countries", countriesItem.toString())
@@ -72,7 +72,7 @@ class CountryInfoFragment : Fragment() {
                         ?.replace("[", "")?.replace("]", "")
                 drivingSideText.text = countriesItem.car?.side
 
-
+                imageAssets.load(imageList[index])
                 nextBtn.setOnClickListener {
                     index = (index + 1) % imageList.size
                     imageAssets.load(imageList[index])

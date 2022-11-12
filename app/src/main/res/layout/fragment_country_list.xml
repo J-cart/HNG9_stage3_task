@@ -83,8 +83,6 @@
             android:background="@drawable/bg_white_background"
             android:padding="8dp"
             app:iconifiedByDefault="false"
-
-
             app:queryHint="Search Location"
             tools:layout_editor_absoluteX="16dp" />
     </androidx.cardview.widget.CardView>
