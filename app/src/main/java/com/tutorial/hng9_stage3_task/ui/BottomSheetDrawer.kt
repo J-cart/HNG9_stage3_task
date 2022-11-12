@@ -1,4 +1,4 @@
-package com.tutorial.hng9_stage3_task
+package com.tutorial.hng9_stage3_task.ui
 
 
 import android.os.Bundle
@@ -7,23 +7,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
-import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.tutorial.hng9_stage3_task.R
 import com.tutorial.hng9_stage3_task.arch.CountriesViewModel
 import com.tutorial.hng9_stage3_task.databinding.BottomSheetDrawerBinding
 import com.tutorial.hng9_stage3_task.utils.RegisterClicks
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class BottomSheetDrawer : BottomSheetDialogFragment() {
 
     private var _binding: BottomSheetDrawerBinding? = null
     private val binding get() = _binding!!
-    private lateinit var viewModel:CountriesViewModel
+    private lateinit var viewModel: CountriesViewModel
+    private lateinit var onRegisterClicks: RegisterClicks
     private var timeFilterList = mutableListOf<String>()
     private var continentFilterList = mutableListOf<String>()
     private var timeToggle = false
@@ -41,6 +39,7 @@ class BottomSheetDrawer : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(requireParentFragment())[CountriesViewModel::class.java]
+        onRegisterClicks = requireParentFragment() as RegisterClicks
 
         binding.apply {
             doTimeOp(gmt3Checkbox, "UTC+03:00")
@@ -58,17 +57,19 @@ class BottomSheetDrawer : BottomSheetDialogFragment() {
             doContOp(northAmCheckbox, "North America")
             doContOp(oceaniaCheckbox, "Oceania")
             doContOp(southAmcheckbox, "South America")
+
             resetBtn.setOnClickListener {
-                timeFilterList.clear()
-                continentFilterList.clear()
+                viewModel.clearTimeFilter()
+                viewModel.clearContFilter()
+                onRegisterClicks.onResetClicked()
+                this@BottomSheetDrawer.dismiss()
             }
             resultBtn.setOnClickListener {
                 viewLifecycleOwner.lifecycleScope.launch {
-                    Log.d("checkBox","result btn clicked")
+                    Log.d("checkBox", "result btn clicked")
+
                     viewModel.getFiltered(continentFilterList, timeFilterList)
-                    viewModel.filteredList.collect{
-                        Log.d("checkBox","filtered list-- $it  flow collected")
-                    }
+                    onRegisterClicks.onFilterClicked()
                 }
 
             }
@@ -116,27 +117,34 @@ class BottomSheetDrawer : BottomSheetDialogFragment() {
 
     }
 
-    private fun checkIfExistTime(item: String): Boolean {
-        return timeFilterList.contains(item)
-    }
-
-    private fun checkIfExistContinent(item: String): Boolean {
-        return continentFilterList.contains(item)
-    }
 
     private fun doTimeOp(view: CheckBox, text: String) {
-        view.isChecked = timeFilterList.contains(text)
+        lifecycleScope.launch {
+            viewModel.checkIfExistTimeFilter(text).collect { exist ->
+                view.isChecked = exist
+            }
+
+        }
         view.setOnCheckedChangeListener { _, isChecked ->
             when {
                 isChecked -> {
-                    if (!checkIfExistTime(text)) {
-                        timeFilterList.add(text)
-                        Log.d("time checkBox", "$text is selected-- $timeFilterList")
+                    lifecycleScope.launch {
+                        viewModel.checkIfExistTimeFilter(text).collect { exist ->
+                            if (!exist) {
+                                viewModel.updateTimeFilterList(text, true)
+                                Log.d(
+                                    "time checkBox",
+                                    "$text is selected-- ${viewModel.timeFilterList.value}"
+                                )
+                            }
+                        }
+
                     }
                 }
                 else -> {
+                    viewModel.updateTimeFilterList(text, false)
                     timeFilterList.remove(text)
-                    Log.d("time checkBox", "$text is removed-- $timeFilterList")
+                    Log.d("time checkBox", "$text is removed-- ${viewModel.timeFilterList.value}")
                 }
             }
 
@@ -144,18 +152,34 @@ class BottomSheetDrawer : BottomSheetDialogFragment() {
     }
 
     private fun doContOp(view: CheckBox, text: String) {
-        view.isChecked = continentFilterList.contains(text)
+        lifecycleScope.launch {
+            viewModel.checkIfExistContFilter(text).collect { exist ->
+                view.isChecked = exist
+            }
+
+        }
         view.setOnCheckedChangeListener { _, isChecked ->
             when {
                 isChecked -> {
-                    if (!checkIfExistContinent(text)) {
-                        continentFilterList.add(text)
-                        Log.d(" cont checkBox", "$text is selected-- $continentFilterList")
+                    lifecycleScope.launch {
+                        viewModel.checkIfExistContFilter(text).collect { exist ->
+                            if (!exist) {
+                                viewModel.updateContFilterList(text, true)
+                                Log.d(
+                                    "cont checkBox",
+                                    "$text is selected-- ${viewModel.continentFilterList.value}"
+                                )
+                            }
+                        }
+
                     }
                 }
                 else -> {
-                    continentFilterList.remove(text)
-                    Log.d("checkBox", "$text is selected-- $continentFilterList")
+                    viewModel.updateContFilterList(text, false)
+                    Log.d(
+                        "cont checkBox",
+                        "$text is selected-- ${viewModel.continentFilterList.value}"
+                    )
                 }
             }
 

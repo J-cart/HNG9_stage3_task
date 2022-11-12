@@ -18,6 +18,7 @@ class ChildAdapter(private val onClick: RegisterClicks) : RecyclerView.Adapter<C
             binding.apply {
                 countryLogo.load(items.flags?.png)
                 countryText.text = items.name?.common
+                capitalText.text = items.capital?.get(0)
                 binding.root.setOnClickListener {
                     listener?.invoke(items)
                     onClick.onChildClicked(items)

@@ -1,4 +1,4 @@
-package com.tutorial.hng9_stage3_task
+package com.tutorial.hng9_stage3_task.ui
 
 import android.os.Bundle
 import android.util.Log

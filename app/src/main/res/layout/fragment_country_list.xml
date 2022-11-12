@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CountryListFragment">
+    tools:context=".ui.CountryListFragment">
 
     <TextView
         android:id="@+id/titleText"
@@ -15,7 +15,7 @@
         android:gravity="start"
         android:text="Explore"
         android:fontFamily="@font/pacifico"
-        android:textColor="@color/black"
+        android:textColor="?attr/colorOnSurface"
         android:textSize="28dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/modeBtn"
@@ -80,10 +80,9 @@
             android:id="@+id/searchView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_white_background"
             android:padding="8dp"
             app:iconifiedByDefault="false"
-            app:queryHint="Search Location"
+            app:queryHint="Search Country"
             tools:layout_editor_absoluteX="16dp" />
     </androidx.cardview.widget.CardView>
 
@@ -125,7 +124,7 @@
         android:fadeScrollbars="true"
         android:orientation="vertical"
 
-        android:overScrollMode="ifContentScrolls"
+        android:overScrollMode="never"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -8,8 +8,8 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/countryLogo"
-        android:layout_width="40dp"
-        android:layout_height="30dp"
+        android:layout_width="45dp"
+        android:layout_height="35dp"
         android:layout_margin="6dp"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -21,96 +21,27 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:padding="8dp"
+        android:padding="2dp"
         android:textAlignment="textStart"
-        android:textColor="@color/black"
-        android:textSize="15dp"
-        app:layout_constraintBottom_toBottomOf="@+id/countryLogo"
+        android:textColor="?attr/colorOnSurface"
+        android:textSize="18dp"
         app:layout_constraintStart_toEndOf="@id/countryLogo"
         app:layout_constraintTop_toTopOf="@+id/countryLogo"
         tools:text="hello bro this is Joseph" />
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/capitalText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:padding="3dp"
+        android:textAlignment="textStart"
+        android:textColor="?attr/colorOnSurface"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toBottomOf="@id/countryLogo"
+        app:layout_constraintStart_toStartOf="@+id/countryText"
+        app:layout_constraintTop_toBottomOf="@id/countryText"
+        tools:text="hello bro this is Joseph" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-    <!--
-    <?xml version="1.0" encoding="utf-8"?>
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clipChildren="false">
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:backgroundTint="@color/purple_200"
-            android:elevation="50dp"
-            app:cardCornerRadius="10dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clipChildren="false">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/userBody"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:padding="8dp"
-                    android:textAlignment="textStart"
-                    android:textColor="@color/black"
-                    android:textSize="15dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="hello bro this is Joseph" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/msg"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="5dp"
-                    android:ellipsize="end"
-                    android:maxLength="30"
-                    android:padding="3dp"
-                    android:textAlignment="textStart"
-                    android:textColor="@color/black"
-                    android:textSize="15dp"
-                    android:textStyle="italic"
-                    app:layout_constraintEnd_toStartOf="@+id/statusText"
-                    app:layout_constraintStart_toStartOf="@+id/userBody"
-                    app:layout_constraintTop_toBottomOf="@id/userBody"
-                    tools:text="hello message" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/statusText"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:ellipsize="end"
-                    android:maxLength="30"
-                    android:padding="3dp"
-                    android:textColor="@color/black"
-                    android:textSize="15dp"
-                    android:textStyle="italic"
-                    app:layout_constraintBottom_toBottomOf="@+id/msg"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    tools:text="sent" />
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        </androidx.cardview.widget.CardView>
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-    -->

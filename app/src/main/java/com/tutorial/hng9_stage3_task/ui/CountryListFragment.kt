@@ -1,4 +1,4 @@
-package com.tutorial.hng9_stage3_task
+package com.tutorial.hng9_stage3_task.ui
 
 import android.os.Bundle
 import android.util.Log
@@ -13,6 +13,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.tutorial.hng9_stage3_task.arch.CountriesViewModel
 import com.tutorial.hng9_stage3_task.databinding.FragmentCountryListBinding
@@ -49,6 +50,8 @@ class CountryListFragment : Fragment(), RegisterClicks {
             }
         }
         setUpCollector()
+        binding.modeBtn.setOnClickListener { showDialog() }
+        binding.langBtn.setOnClickListener { showDialog() }
     }
 
     private fun setUpCollector() {
@@ -65,7 +68,7 @@ class CountryListFragment : Fragment(), RegisterClicks {
                         }
                         binding.errorText.setOnClickListener {
                             val route =
-                                CountryListFragmentDirections.actionCountryListFragmentToCountryInfoFragment(
+                               CountryListFragmentDirections.actionCountryListFragmentToCountryInfoFragment(
                                     null
                                 )
                             findNavController().navigate(route)
@@ -85,7 +88,7 @@ class CountryListFragment : Fragment(), RegisterClicks {
                         Snackbar.make(
                             requireView(),
                             "ERROR! Try refreshing page",
-                            Snackbar.LENGTH_LONG
+                            5000
                         )
                             .setAction("Refresh") { lifecycleScope.launch { viewModel.getAllCountries() } }
                             .show()
@@ -105,6 +108,11 @@ class CountryListFragment : Fragment(), RegisterClicks {
     private fun setUpFilterCollector() {
         lifecycleScope.launch {
             viewModel.filteredList.collect { resource ->
+                Snackbar.make(
+                    requireView(),
+                    "INSIDE FILTER COLLECTOR",
+                    5000
+                ).show()
                 when (resource) {
                     is Resource.Successful -> {
                         binding.progressBar.isVisible = false
@@ -114,7 +122,7 @@ class CountryListFragment : Fragment(), RegisterClicks {
                         }
                         binding.errorText.setOnClickListener {
                             val route =
-                                CountryListFragmentDirections.actionCountryListFragmentToCountryInfoFragment(
+                               CountryListFragmentDirections.actionCountryListFragmentToCountryInfoFragment(
                                     null
                                 )
                             findNavController().navigate(route)
@@ -183,9 +191,30 @@ class CountryListFragment : Fragment(), RegisterClicks {
         }
     }
 
+    private fun showDialog(){
+        MaterialAlertDialogBuilder(requireContext()).apply {
+            setTitle("Coming Soon")
+            setMessage("This feature is not available -- yet.")
+            setPositiveButton("OK") { d, _ ->
+               d.dismiss()
+            }
+            show()
+        }
+    }
+
     override fun onChildClicked(data: CountriesItem) {
         val route =
-            CountryListFragmentDirections.actionCountryListFragmentToCountryInfoFragment(data)
+           CountryListFragmentDirections.actionCountryListFragmentToCountryInfoFragment(
+                data
+            )
         findNavController().navigate(route)
+    }
+
+    override fun onFilterClicked() {
+        setUpFilterCollector()
+    }
+
+    override fun onResetClicked() {
+        setUpCollector()
     }
 }

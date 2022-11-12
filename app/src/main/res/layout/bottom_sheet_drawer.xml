@@ -43,7 +43,7 @@
         android:id="@+id/timeCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/timeZoneText">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -252,7 +252,7 @@
         android:id="@+id/conCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/continentText">

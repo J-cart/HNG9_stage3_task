@@ -5,11 +5,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tutorial.hng9_stage3_task.models.MapperNew
 import com.tutorial.hng9_stage3_task.models.Resource
-import com.tutorial.hng9_stage3_task.models.main.Countries
 import com.tutorial.hng9_stage3_task.models.main.CountriesItem
 import com.tutorial.hng9_stage3_task.utils.ApiService
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class CountriesViewModel : ViewModel() {
@@ -21,7 +19,10 @@ class CountriesViewModel : ViewModel() {
     private var _filteredList = MutableStateFlow<Resource<List<MapperNew>>>(Resource.Loading())
     val filteredList get() = _filteredList.asStateFlow()
 
-     var rawList = MutableStateFlow<Resource<List<CountriesItem>>>(Resource.Empty())
+    private var rawList = MutableStateFlow<Resource<List<CountriesItem>>>(Resource.Empty())
+
+    var timeFilterList = MutableStateFlow<MutableList<String>>(mutableListOf())
+    var continentFilterList = MutableStateFlow<MutableList<String>>(mutableListOf())
 
 //private var _allCountriesFlow = MutableStateFlow<Resource<Countries>>(Resource.Loading())
 //    val allCountriesFlow get() = _allCountriesFlow.asStateFlow()
@@ -66,19 +67,18 @@ class CountriesViewModel : ViewModel() {
         Log.d("filter Result", "inside filters method")
         viewModelScope.launch {
             rawList.collect { resource ->
-                Log.d("filter Result", "raw List${rawList.value}")
+                Log.d("filter Result", "raw List${rawList.value.data}")
                 when (resource) {
                     is Resource.Successful -> {
                         resource.data?.let {
-                            val filter = filteredResult(continents, timeZones, it)
-                            Log.d("filter Result", "filtered item $filter")
-                            if (filter.isNotEmpty()) {
-                                _filteredList.value =
-                                    Resource.Successful(dataMapper(filter))
-                            } else {
-                                _filteredList.value = Resource.Empty()
+                            filteredResult(it).collect{filter->
+                                if (filter.isNotEmpty()) {
+                                    _filteredList.value =
+                                        Resource.Successful(dataMapper(filter))
+                                } else {
+                                    _filteredList.value = Resource.Empty()
+                                }
                             }
-
                         }
                     }
                     is Resource.Empty -> {
@@ -115,26 +115,81 @@ class CountriesViewModel : ViewModel() {
     }
 
     private fun filteredResult(
-        continents: List<String>,
-        timeZone: List<String>,
         data: List<CountriesItem>
-    ): List<CountriesItem> {
-        val list = mutableListOf<CountriesItem>()
-        val continent = data.filter { items ->
-            continents.any { continent ->
-                items.continents?.contains(continent) ?: false
+    ) =
+        callbackFlow<List<CountriesItem>> {
+            continentFilterList.collect { continents ->
+                timeFilterList.collect { timeZone ->
+                    val list = mutableListOf<CountriesItem>()
+                    val continent = data.filter { items ->
+                        continents.any { continent ->
+                            items.continents?.contains(continent) ?: false
+                        }
+                    }.toMutableList()
+
+                    val time = data.filter { items ->
+                        timeZone.any { time ->
+                            items.timezones?.contains(time) ?: false
+                        }
+                    }
+                    list.addAll(continent)
+                    list.addAll(time)
+                    trySend(list)
+
+                    Log.d("filter viewModel", "$list")
+                }
+            }}
+
+
+
+    fun updateTimeFilterList(value: String, add: Boolean) {
+        timeFilterList.update {
+            if (add) {
+                it.add(value)
+            } else {
+                it.remove(value)
+            }
+
+            return
+        }
+    }
+
+    fun updateContFilterList(value: String, add: Boolean) {
+        continentFilterList.update {
+            if (add) {
+                it.add(value)
+            } else {
+                it.remove(value)
+            }
+            return
+        }
+    }
+
+    fun checkIfExistTimeFilter(value: String) =
+        callbackFlow {
+            timeFilterList.collect {
+                trySend(it.contains(value))
             }
         }
 
-        val time = data.filter { items ->
-            timeZone.any { time ->
-                items.timezones?.contains(time) ?: false
+    fun checkIfExistContFilter(value: String) =
+        callbackFlow {
+            continentFilterList.collect {
+                trySend(it.contains(value))
             }
         }
-        list.addAll(continent)
-        list.addAll(time)
-        Log.d("filter viewModel","$list")
-        return list
+
+    fun clearTimeFilter(){
+        timeFilterList.update {
+            it.clear()
+            return
+        }
+    }
+    fun clearContFilter(){
+        continentFilterList.update {
+            it.clear()
+            return
+        }
     }
 
 
