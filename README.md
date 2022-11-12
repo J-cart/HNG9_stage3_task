@@ -36,7 +36,7 @@ The overrall architecture of **Countries app** is composed of two layers; the UI
   - [Countries Api](https://restcountries.com/): Get information about countries via a RESTful API
 
 ## Download
-You can download the latest APK from [Releases](), also for Appetize.io [App]()
+You can download the latest APK from [Releases](), also for Appetize.io [App](https://appetize.io/app/pnfmrqdwc6aj2e72jxrdehorka?device=pixel4&osVersion=11.0&scale=75)
 
 
 ## Features to be added
