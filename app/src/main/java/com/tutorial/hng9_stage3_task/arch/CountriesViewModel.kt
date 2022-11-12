@@ -17,6 +17,12 @@ class CountriesViewModel : ViewModel() {
 
     private var _allCountriesFlow = MutableStateFlow<Resource<List<MapperNew>>>(Resource.Loading())
     val allCountriesFlow get() = _allCountriesFlow.asStateFlow()
+
+    private var _filteredList = MutableStateFlow<Resource<List<MapperNew>>>(Resource.Loading())
+    val filteredList get() = _filteredList.asStateFlow()
+
+    private var rawList = MutableStateFlow<Resource<Countries>>(Resource.Empty())
+
 //private var _allCountriesFlow = MutableStateFlow<Resource<Countries>>(Resource.Loading())
 //    val allCountriesFlow get() = _allCountriesFlow.asStateFlow()
 
@@ -32,23 +38,56 @@ class CountriesViewModel : ViewModel() {
                             if (countries.isNotEmpty()) {
 
                                 _allCountriesFlow.value = Resource.Successful(dataMapper(countries))
+                                rawList.value = Resource.Successful(countries)
 //                                    Resource.Successful(countries)
 
                             } else {
                                 _allCountriesFlow.value = Resource.Empty()
+                                rawList.value = Resource.Empty()
                             }
                         }
                     }
                     else -> {
                         _allCountriesFlow.value = Resource.Failure(result.errorBody().toString())
+                        rawList.value = Resource.Empty()
                     }
                 }
             } catch (e: Exception) {
                 _allCountriesFlow.value = Resource.Failure(e.toString())
+                rawList.value = Resource.Empty()
                 Log.d("Inside try catch 2", "$e")
             }
 
 
+        }
+    }
+
+    suspend fun getFiltered(continents: List<String>, timeZones: List<String>) {
+        Log.d("filter Result", "inside filters method")
+        viewModelScope.launch {
+            rawList.collect { resource ->
+                Log.d("filter Result", "${rawList.value}")
+                when (resource) {
+                    is Resource.Successful -> {
+                        resource.data?.let {
+                            val filter = filteredResult(continents, timeZones, it)
+                            Log.d("filter Result", "$filter")
+                            if (filter.isNotEmpty()) {
+                                _filteredList.value =
+                                    Resource.Successful(dataMapper(filter as Countries))
+                            } else {
+                                _filteredList.value = Resource.Empty()
+                            }
+
+                        }
+                    }
+                    is Resource.Empty -> {
+                        _filteredList.value = Resource.Empty()
+                    }
+                    else -> Unit
+                }
+
+            }
         }
     }
 
@@ -73,6 +112,28 @@ class CountriesViewModel : ViewModel() {
         Log.d("MappingItems", "$mainList")
 
         return mainList
+    }
+
+    private fun filteredResult(
+        continents: List<String>,
+        timeZone: List<String>,
+        data: Countries
+    ): List<CountriesItem> {
+        val list = mutableListOf<CountriesItem>()
+        val continent = data.filter { items ->
+            continents.any { continent ->
+                items.continents?.contains(continent) ?: false
+            }
+        }
+
+        val time = data.filter { items ->
+            timeZone.any { time ->
+                items.timezones?.contains(time) ?: false
+            }
+        }
+        list.addAll(continent)
+        list.addAll(time)
+        return list
     }
 
 

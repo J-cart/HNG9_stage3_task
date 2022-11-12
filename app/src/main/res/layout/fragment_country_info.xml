@@ -8,18 +8,43 @@
     android:layout_height="match_parent"
     tools:context=".CountryInfoFragment">
 
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/backBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/ic_baseline_arrow_back_ios_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/pageName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="90dp"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/backBtn"
+            app:layout_constraintStart_toEndOf="@id/backBtn"
+            app:layout_constraintTop_toTopOf="@+id/backBtn"
+            tools:text="TextView" />
+
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="200dp"
             android:layout_margin="32dp"
             app:layout_constraintBottom_toTopOf="@+id/guideline2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintStart_toStartOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -29,23 +54,23 @@
                     android:id="@+id/imageAssets"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MaterialComponents.MaterialCalendar.Day"
                     android:src="@drawable/ic_launcher_foreground"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MaterialComponents.MaterialCalendar.Day" />
 
                 <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/prevBtn"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginStart="43dp"
-                    android:src="@drawable/ic_baseline_arrow_back_ios_24"
                     android:background="@drawable/background_shape"
+                    android:src="@drawable/ic_baseline_arrow_back_ios_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     tools:layout_editor_absoluteY="74dp" />
 
                 <androidx.appcompat.widget.AppCompatImageButton
@@ -53,8 +78,8 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginEnd="43dp"
-                    android:src="@drawable/ic_baseline_arrow_back_ios_24"
                     android:background="@drawable/background_shape"
+                    android:src="@drawable/ic_baseline_arrow_forward_ios_24"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -490,7 +515,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_begin="230dp" />
+            app:layout_constraintGuide_begin="300dp" />
 
 
         <androidx.constraintlayout.widget.Guideline
@@ -498,21 +523,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_begin="340dp" />
+            app:layout_constraintGuide_begin="410dp" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_begin="450dp" />
+            app:layout_constraintGuide_begin="520dp" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_begin="560dp" />
+            app:layout_constraintGuide_begin="630dp" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

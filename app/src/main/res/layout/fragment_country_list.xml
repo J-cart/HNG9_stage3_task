@@ -14,56 +14,82 @@
         android:layout_marginTop="32dp"
         android:gravity="start"
         android:text="Explore"
+        android:fontFamily="@font/pacifico"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="28dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/modeBtn"
         app:layout_constraintEnd_toStartOf="@+id/modeBtn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.button.MaterialButton
+    <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/modeBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:src="@drawable/ic_baseline_dark_mode_24"
+        android:backgroundTint="@color/white"
         android:layout_marginEnd="20dp"
-        android:text="Night"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/langBtn"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="8dp"
-        android:text="English"
+        android:backgroundTint="@color/white"
+        android:text="EN"
+        android:textColor="?attr/colorOnSecondary"
+        app:icon="@drawable/ic_baseline_language_24"
+        app:iconTint="?attr/colorOnSecondary"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchView" />
+        app:layout_constraintTop_toBottomOf="@+id/searchCard" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/filterBtn"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="20dp"
-        android:text="funnel"
+        android:backgroundTint="@color/white"
+        android:text="Filter"
+        android:textColor="?attr/colorOnSecondary"
+        android:textSize="12dp"
+        app:icon="@drawable/ic_baseline_filter_alt_24"
+        app:iconTint="?attr/colorOnSecondary"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchView" />
+        app:layout_constraintTop_toBottomOf="@+id/searchCard" />
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/searchView"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/searchCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_white_background"
-        android:padding="8dp"
-        app:iconifiedByDefault="false"
+        android:layout_marginStart="50dp"
+        app:cardCornerRadius="5dp"
+        android:layout_marginEnd="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline3">
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_white_background"
+            android:padding="8dp"
+            app:iconifiedByDefault="false"
 
 
-        app:layout_constraintTop_toTopOf="@+id/guideline3"
-        app:queryHint="Search Location"
-        tools:layout_editor_absoluteX="16dp" />
+            app:queryHint="Search Location"
+            tools:layout_editor_absoluteX="16dp" />
+    </androidx.cardview.widget.CardView>
+
+
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -84,6 +110,7 @@
         android:text="Search Location"
         android:textColor="@color/black"
         android:textSize="20sp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

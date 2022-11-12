@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.tutorial.hng9_stage3_task.R
 import com.tutorial.hng9_stage3_task.databinding.CustomViewholderBinding
 import com.tutorial.hng9_stage3_task.models.main.CountriesItem
@@ -15,6 +16,7 @@ class ChildAdapter(private val onClick: RegisterClicks) : RecyclerView.Adapter<C
        private val binding = CustomViewholderBinding.bind(view)
         fun bind(items: CountriesItem) {
             binding.apply {
+                countryLogo.load(items.flags?.png)
                 countryText.text = items.name?.common
                 binding.root.setOnClickListener {
                     listener?.invoke(items)

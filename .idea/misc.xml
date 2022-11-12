@@ -9,10 +9,14 @@
         <entry key="..\:/Users/DELL/AndroidStudioProjects/HNG9_stage3_task/app/src/main/res/drawable/loading_anim.xml" value="0.2225" />
         <entry key="..\:/Users/DELL/AndroidStudioProjects/HNG9_stage3_task/app/src/main/res/drawable/loading_img.xml" value="0.2225" />
         <entry key="..\:/Users/DELL/AndroidStudioProjects/HNG9_stage3_task/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/HNG9_stage3_task/app/src/main/res/layout/bottom_sheet_drawer.xml" value="0.2" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/HNG9_stage3_task/app/src/main/res/layout/continents_view.xml" value="0.264" />
         <entry key="..\:/Users/DELL/AndroidStudioProjects/HNG9_stage3_task/app/src/main/res/layout/custom_parent_viewholder.xml" value="0.264" />
         <entry key="..\:/Users/DELL/AndroidStudioProjects/HNG9_stage3_task/app/src/main/res/layout/custom_viewholder.xml" value="0.4" />
         <entry key="..\:/Users/DELL/AndroidStudioProjects/HNG9_stage3_task/app/src/main/res/layout/fragment_country_info.xml" value="0.264" />
-        <entry key="..\:/Users/DELL/AndroidStudioProjects/HNG9_stage3_task/app/src/main/res/layout/fragment_country_list.xml" value="0.176" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/HNG9_stage3_task/app/src/main/res/layout/fragment_country_list.xml" value="0.264" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/HNG9_stage3_task/app/src/main/res/layout/fragment_item_list_dialog_list_dialog.xml" value="0.13196555217831812" />
+        <entry key="..\:/Users/DELL/AndroidStudioProjects/HNG9_stage3_task/app/src/main/res/layout/time_zone_view.xml" value="0.2" />
       </map>
     </option>
   </component>

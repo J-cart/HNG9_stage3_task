@@ -57,21 +57,14 @@ class CountryListFragment : Fragment(), RegisterClicks {
                 when (resource) {
                     is Resource.Successful -> {
                         binding.progressBar.isVisible = false
-//                        binding.errorText.text = resource.data?.toString()
-
                         resource.data?.let { countriesAdapter.submitList(it) }
                         binding.errorText.setOnClickListener {
-                            val route = CountryListFragmentDirections.actionCountryListFragmentToCountryInfoFragment(null)//resource.data?.get(2)
+                            val route = CountryListFragmentDirections.actionCountryListFragmentToCountryInfoFragment(null)
                             findNavController().navigate(route)
                         }
-//                        countriesAdapter.onAdapterClick {
-//                            val route = CountryListFragmentDirections.actionCountryListFragmentToCountryInfoFragment(it)//resource.data?.get(2)
-//                            findNavController().navigate(route)
-//                        }
-//                        childAdapter.onAdapterClick {
-//                            val route = CountryListFragmentDirections.actionCountryListFragmentToCountryInfoFragment(it)//resource.data?.get(2)
-//                            findNavController().navigate(route)
-//                        }
+                        binding.filterBtn.setOnClickListener {
+                            BottomSheetDrawer().show(childFragmentManager,"BOTTOM_SHEET")
+                        }
                     }
                     is Resource.Failure -> {
                         binding.progressBar.isVisible = false
@@ -89,7 +82,37 @@ class CountryListFragment : Fragment(), RegisterClicks {
         }
     }
 
+    private fun setUpFilterCollector(){
+        lifecycleScope.launch {
+            viewModel.filteredList.collect { resource ->
+                when (resource) {
+                    is Resource.Successful -> {
+                        binding.progressBar.isVisible = false
+
+                        resource.data?.let { countriesAdapter.submitList(it) }
+                        binding.errorText.setOnClickListener {
+                            val route = CountryListFragmentDirections.actionCountryListFragmentToCountryInfoFragment(null)
+                            findNavController().navigate(route)
+                        }
+                    }
+                    is Resource.Failure -> {
+                        binding.progressBar.isVisible = false
+                        binding.errorText.text = resource.msg
+                    }
+                    is Resource.Loading -> {
+                        binding.progressBar.isVisible = true
+                    }
+                    is Resource.Empty -> {
+                        binding.errorText.text = "Result is empty"
+                    }
+                }
+
+            }
+        }
+    }
+
+
     override fun onChildClicked(data: CountriesItem) {
-        val route = CountryListFragmentDirections.actionCountryListFragmentToCountryInfoFragment(data)//resource.data?.get(2)
+        val route = CountryListFragmentDirections.actionCountryListFragmentToCountryInfoFragment(data)
         findNavController().navigate(route)    }
 }
