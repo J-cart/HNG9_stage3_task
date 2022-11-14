@@ -34,17 +34,28 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.button.MaterialButton
+
+    <Spinner
+        android:id="@+id/toSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:entries="@array/countries_name"
+        android:padding="8dp"
+
+        app:layout_constraintBottom_toBottomOf="@+id/langBtn"
+        app:layout_constraintStart_toEndOf="@+id/langBtn"
+        app:layout_constraintTop_toTopOf="@+id/langBtn" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/langBtn"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="8dp"
         android:backgroundTint="@color/white"
         android:text="EN"
-        android:textColor="?attr/colorOnSecondary"
-        app:icon="@drawable/ic_baseline_language_24"
+        android:src="@drawable/ic_baseline_language_24"
         app:iconTint="?attr/colorOnSecondary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchCard" />

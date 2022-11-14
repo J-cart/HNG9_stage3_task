@@ -2,4 +2,58 @@
     <string name="app_name">HNG9_stage3_task</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="countries_name">
+       <item>
+            Ara</item>
+        <item>
+            Bre</item>
+        <item>
+            Ces</item>
+        <item>
+            Cym</item>
+        <item>
+            Deu</item>
+        <item>
+            Eng</item>
+        <item>
+            Est</item>
+        <item>
+            Fin</item>
+        <item>
+            Fra,</item>
+        <item>
+            Hrv</item>
+        <item>
+            Hun</item>
+        <item>
+            Ita</item>
+        <item>
+            Jpn</item>
+        <item>
+            Kor</item>
+        <item>
+            Nld</item>
+        <item>
+            Per</item>
+        <item>
+            Pol</item>
+        <item>
+            Por</item>
+        <item>
+            Rus</item>
+        <item>
+            Slk</item>
+        <item>
+            Spa</item>
+        <item>
+            Swe</item>
+        <item>
+            Tur</item>
+        <item>
+            Urd</item>
+        <item>
+        Zho</item>
+
+    </string-array>
 </resources>

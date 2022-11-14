@@ -11,7 +11,7 @@ import com.tutorial.hng9_stage3_task.R
 import com.tutorial.hng9_stage3_task.databinding.CustomParentViewholderBinding
 import com.tutorial.hng9_stage3_task.models.main.CountriesItem
 
-class ParentAdapter(private val onClick: RegisterClicks) : RecyclerView.Adapter<ParentAdapter.ViewHolder>() {
+class ParentAdapter(private val onClick: RegisterClicks, private val translate:Boolean,private val language:String) : RecyclerView.Adapter<ParentAdapter.ViewHolder>() {
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val binding = CustomParentViewholderBinding.bind(view)
@@ -64,7 +64,7 @@ class ParentAdapter(private val onClick: RegisterClicks) : RecyclerView.Adapter<
     fun submitList(list: List<MapperNew>) = differ.submitList(list)
 
    private fun addRV(recyclerView: RecyclerView, list: List<CountriesItem>) {
-        val adapter = ChildAdapter(onClick)
+        val adapter = ChildAdapter(onClick,translate,language)
         adapter.submitList(list)
         recyclerView.adapter = adapter
     }

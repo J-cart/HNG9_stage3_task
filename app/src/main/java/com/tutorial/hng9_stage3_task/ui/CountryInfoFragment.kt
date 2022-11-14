@@ -33,9 +33,7 @@ class CountryInfoFragment : Fragment() {
         args.countryItem?.let { countriesItem ->
             val imageList = mutableListOf<String>()
             countriesItem.flags?.png?.let { imageList.add(it) }
-//            countriesItem.flags?.svg?.let { imageList.add(it) }
             countriesItem.coatOfArms?.png?.let { imageList.add(it) }
-//            countriesItem.coatOfArms?.svg?.let { imageList.add(it) }
 
 
             Log.d("Countries", countriesItem.toString())
@@ -51,26 +49,31 @@ class CountryInfoFragment : Fragment() {
                 capText.text = countriesItem.capital.toString().replace("[", "").replace("]", "")
                 subRegText.text = countriesItem.subregion
 
-                continentText.text = countriesItem.continents?.get(0)
-                offNameText.text = countriesItem.name?.official
-                denonymText.text =
-                    "F: ${countriesItem.demonyms?.eng?.f}, M:${countriesItem.demonyms?.eng?.m}"
+                continentText.text = countriesItem.continents?.get(0)?: "Not Available"
+                offNameText.text = countriesItem.name?.official ?: "Not Available"
+                denonymText.text = String.format("F: %s,M: %s",countriesItem.demonyms?.eng?.f,countriesItem.demonyms?.eng?.m)
                 startOfWkText.text = countriesItem.startOfWeek
 
 
-                bordersText.text = countriesItem.borders?.joinToString(",")
+                bordersText.text = countriesItem.borders?.joinToString(",")?: "Not Available"
                 areaText.text = countriesItem.area.toString()
                 coordinatesText.text =
                     countriesItem.latlng.toString().replace("[", "").replace("]", "")
-                capCoordText.text = countriesItem.capitalInfo?.latlng?.get(0)?.toString()
+                capCoordText.text = countriesItem.capitalInfo?.latlng?.get(0)?.toString() ?: "Not Available"
 
-                timeZoneText.text =
-                    countriesItem.timezones.toString().replace("[", "").replace("]", "")
+                timeZoneText.text = countriesItem.timezones?.let {
+                    if (it.size >3){
+                        String.format("%s ...",it.subList(0,2)).replace("[", "").replace("]", "")
+                    } else{
+                        String.format("%s",it).replace("[", "").replace("]", "")
+                        it.toString().replace("[", "").replace("]", "")
+                    }
+                }?:"Not Available"
+
+
                 nccText.text = countriesItem.ccn3
-                dialingCodeText.text =
-                    countriesItem.idd?.root + (countriesItem.idd?.suffixes)?.toString()
-                        ?.replace("[", "")?.replace("]", "")
-                drivingSideText.text = countriesItem.car?.side
+                dialingCodeText.text = String.format("%s%s", countriesItem.idd?.root , (countriesItem.idd?.suffixes)).replace("[", "").replace("]", "")
+                drivingSideText.text = countriesItem.car?.side ?: "Not Available"
 
                 imageAssets.load(imageList[index])
                 nextBtn.setOnClickListener {

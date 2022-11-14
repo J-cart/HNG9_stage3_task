@@ -10,15 +10,22 @@ import coil.load
 import com.tutorial.hng9_stage3_task.R
 import com.tutorial.hng9_stage3_task.databinding.CustomViewholderBinding
 import com.tutorial.hng9_stage3_task.models.main.CountriesItem
+import com.tutorial.hng9_stage3_task.models.main.Translations
 
-class ChildAdapter(private val onClick: RegisterClicks) : RecyclerView.Adapter<ChildAdapter.ViewHolder>() {
+class ChildAdapter(private val onClick: RegisterClicks, private val translate:Boolean,private val language:String) : RecyclerView.Adapter<ChildAdapter.ViewHolder>() {
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
        private val binding = CustomViewholderBinding.bind(view)
         fun bind(items: CountriesItem) {
             binding.apply {
                 countryLogo.load(items.flags?.png)
-                countryText.text = items.name?.common
-                capitalText.text = items.capital?.get(0)
+                if (translate){
+                    countryText.text = items.translations?.let { getCountryName(language, it) }
+                    capitalText.text = items.capital?.get(0)
+                }else{
+                    countryText.text = items.name?.common
+                    capitalText.text = items.capital?.get(0)
+                }
+
                 binding.root.setOnClickListener {
                     listener?.invoke(items)
                     onClick.onChildClicked(items)
@@ -71,4 +78,54 @@ class ChildAdapter(private val onClick: RegisterClicks) : RecyclerView.Adapter<C
         listener = onclick
     }
 
+    fun getCountryName(value:String,translation: Translations):String? = when(value){
+        "Ara"-> translation.ara?.common
+
+        "Bre"-> translation.bre?.common
+
+        "Ces"-> translation.ces?.common
+
+        "Cym"-> translation.cym?.common
+
+        "Deu"-> translation.deu?.common
+
+        "Est"-> translation.est?.common
+
+        "Fin"-> translation.fin?.common
+
+        "Fra"-> translation.fra?.common
+
+        "Hrv"-> translation.hrv?.common
+
+        "Hun"-> translation.hun?.common
+
+        "Ita"-> translation.ita?.common
+
+        "Jpn"-> translation.jpn?.common
+
+        "Kor"-> translation.kor?.common
+
+        "Nld"-> translation.nld?.common
+
+        "Per"-> translation.per?.common
+
+        "Pol"-> translation.pol?.common
+
+        "Por"-> translation.por?.common
+
+        "Rus"-> translation.rus?.common
+
+        "Slk"-> translation.slk?.common
+
+        "Spa"-> translation.spa?.common
+
+        "Swe"-> translation.swe?.common
+
+        "Tur"-> translation.tur?.common
+
+        "Urd"-> translation.urd?.common
+
+        "Zho"-> translation.zho?.common
+        else -> "Translation Not Available"
+    }
 }

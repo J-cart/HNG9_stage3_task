@@ -4,9 +4,9 @@ package com.tutorial.hng9_stage3_task.models.main
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 import android.os.Parcelable
-import com.tutorial.hng9_stage3_task.models.languages.Car
-import com.tutorial.hng9_stage3_task.models.languages.Gini
-import com.tutorial.hng9_stage3_task.models.languages.Idd
+import com.tutorial.hng9_stage3_task.models.others.Car
+import com.tutorial.hng9_stage3_task.models.others.Gini
+import com.tutorial.hng9_stage3_task.models.others.Idd
 
 @Parcelize
 data class CountriesItem(
@@ -52,7 +52,7 @@ data class CountriesItem(
     val independent: Boolean?,
     @SerializedName("landlocked")
     val landlocked: Boolean?,
-    @SerializedName("languages")
+    @SerializedName("others")
     val languages: Languages?,
     @SerializedName("latlng")
     val latlng: List<Double>?,
