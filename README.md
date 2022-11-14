@@ -36,12 +36,14 @@ The overrall architecture of **Countries app** is composed of two layers; the UI
   - [Countries Api](https://restcountries.com/): Get information about countries via a RESTful API
 
 ## Download
-You can download the latest APK from [Releases](), also for Appetize.io [App](https://appetize.io/app/pnfmrqdwc6aj2e72jxrdehorka?device=pixel4&osVersion=11.0&scale=75)
+You can download the latest APK from [Releases](https://github.com/J-cart/HNG9_stage3_task/blob/master/app/release/app-release.apk), also for Appetize.io [App](https://appetize.io/app/pnfmrqdwc6aj2e72jxrdehorka?device=pixel4&osVersion=11.0&scale=75)
 
 
 ## Features to be added
-- [ ] 
-- [ ] 
-- [ ]
+- [ ] proper app theming
+- [ ] language localization
+- [ ] google maps view to show location on map
 
 ## Side notes
+The major issues I had were lifecycle optimization and filtering the result, I couldnt easily figure out the right pattern for them.
+key learning was a better a way using bottom sheet dialog fragment and the delegating callbacks.
