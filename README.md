@@ -41,8 +41,9 @@ You can download the latest APK from [Releases](https://github.com/J-cart/HNG9_s
 
 ## Features to be added
 - [ ] proper app theming
-- [ ] language localization
+- [x] language localization 
 - [ ] google maps view to show location on map
+
 
 ## Side notes
 The major issues I had were lifecycle optimization and filtering the result, I couldnt easily figure out the right pattern for them.
